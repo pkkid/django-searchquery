@@ -12,6 +12,11 @@ def boolean(valuestr):
     raise SearchError(f"Invalid boolean value '{valuestr}'")
 
 
+def csv(valuestr):
+    """ Appends a trailing comma for better csv varchars. """
+    return valuestr + ','
+
+
 def date(valuestr, tzinfo=None):
     try:
         valuestr = valuestr.replace('_', ' ')
