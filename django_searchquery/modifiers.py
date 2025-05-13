@@ -1,5 +1,7 @@
 # encoding: utf-8
-import timelib
+import dateparser
+
+from dateutil import parser
 from .exceptions import SearchError
 from . import utils
 
@@ -20,7 +22,7 @@ def csv(valuestr):
 def date(valuestr, tzinfo=None):
     try:
         valuestr = valuestr.replace('_', ' ')
-        dt = timelib.strtodatetime(valuestr.encode('utf8'))
+        dt = dateparser.parse(valuestr.encode('utf8'))
         return dt.astimezone(tzinfo)
     except Exception:
         raise SearchError(f"Invalid date format '{valuestr}'.")
