@@ -66,7 +66,7 @@ def datestr_rdelta(valuestr):
         timeframe (like 'yesterday'). These have a start and end; they are
         not specific to a single point in time. After the duration is passed
         back, we can use this along with whatever single date is returned from
-        timelib to figure out the start and end times to filter on. There are
+        dateparser to figure out the start and end times to filter on. There are
         dragons here, but I can't think of a better way.
     """
     # Determine the delimiter
