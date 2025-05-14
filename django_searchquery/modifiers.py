@@ -1,9 +1,8 @@
 # encoding: utf-8
-import dateparser
-
-from dateutil import parser
+import dateparser, logging
 from .exceptions import SearchError
 from . import utils
+log = logging.getLogger(__name__)
 
 
 def boolean(valuestr):
@@ -22,9 +21,10 @@ def csv(valuestr):
 def date(valuestr, tzinfo=None):
     try:
         valuestr = valuestr.replace('_', ' ')
-        dt = dateparser.parse(valuestr.encode('utf8'))
+        dt = dateparser.parse(valuestr)
         return dt.astimezone(tzinfo)
-    except Exception:
+    except Exception as err:
+        log.exception(err)
         raise SearchError(f"Invalid date format '{valuestr}'.")
 
 
