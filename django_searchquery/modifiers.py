@@ -19,14 +19,13 @@ def csv(valuestr):
 
 
 def date(valuestr, tzinfo=None):
-    try:
-        valuestr = valuestr.replace('_', ' ')
-        dt = dateparser.parse(valuestr)
-        return dt.astimezone(tzinfo)
-    except Exception as err:
-        log.exception(err)
+    """ Convert human readable string in any parsable format to a datetime. """
+    valuestr = valuestr.replace('_', ' ')
+    dt = dateparser.parse(valuestr)
+    if dt is None:
         raise SearchError(f"Invalid date format '{valuestr}'.")
-
+    return dt.astimezone(tzinfo)
+        
 
 def default_modifier(valuestr):
     return valuestr

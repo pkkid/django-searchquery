@@ -67,8 +67,10 @@ class Search:
             self._qobject = utils.merge_qobjects(qobjects)
             return self._qobject
         except ParseException as err:
+            log.exception(err)
             self._error = f"Unknown symbol '{err.line[err.loc]}' at position {err.loc}"
         except SearchError as err:
+            log.exception(err)
             self._error = str(err)
         # return no results
         self._qobject = NORESULTS
