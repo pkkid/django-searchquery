@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-from pkg_resources import parse_requirements
 from setuptools import setup
 
 readme = open('README.md', 'r').read()
 with open('requirements.txt') as handle:
-    requirements = [str(req) for req in parse_requirements(handle)]
+    requirements = [line.strip() for line in handle if line.strip() and not line.startswith('#')]
 
 setup(
     name='django_searchquery',
