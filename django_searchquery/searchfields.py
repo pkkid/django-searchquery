@@ -7,7 +7,7 @@ from django.db.models import Q
 from . import modifiers, utils
 from .exceptions import SearchError
 
-OPERATORS = {'=':'__iexact', '>':'__gt', '>=':'__gte', '<=':'__lte', '<':'__lt', ':': '__icontains'}
+OPERATORS = {'=':'__exact', '>':'__gt', '>=':'__gte', '<=':'__lte', '<':'__lt', ':': '__icontains'}
 REVERSEOP = {'__gt':'__lte', '__gte':'__lt', '__lte':'__gt', '__lt':'__gte'}
 
 
