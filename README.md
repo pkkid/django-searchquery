@@ -49,6 +49,13 @@ case-insensative match.
 * `error:assertion` searches the error column for a string containing 'assertion'.
 * `error="unsupported operand"` searches for the exact match 'unsupported operand`.
 
+For string columns, squiggly operators can be used as a shortcut for matching
+many words in the same column. `~` requires that all words are present, while
+`!~` requires that all words are absent.
+
+* `error ~ "unsupported operand"` is equivalent to `error:unsupported error:operand`.
+* `error !~ "unsupported operand"` is equivalent to `-error:unsupported -error:operand`.
+
 ### Infix Notation
 Infix notation is supported with the keywords `and`, `or`, and `not` as well
 as using parenthesis where needed. If there is no keyword specified between

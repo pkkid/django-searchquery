@@ -124,7 +124,22 @@ class Search:
         exclude = not exclude if len(node) == 4 else exclude
         searchkey, operator, valuestr = node[1:] if len(node) == 4 else node
         field = self._get_field(searchkey)
+        if operator in ('~', '!~'):
+            return self._qs_search_column_squiggly(valuestr, operator, field, exclude)
         return field.get_subquery(valuestr, operator, exclude)
+
+    def _qs_search_column_squiggly(self, valuestr, operator, field, exclude=False):
+        """ Handle ~ and !~ operators (contains all words). """
+        words = valuestr.split()
+        if not words:
+            return NORESULTS
+        opexclude = operator == '!~'
+        qobjects = []
+        for word in words:
+            qobject = field.get_subquery(word, ':', exclude=opexclude)
+            qobjects.append(qobject)
+        result = utils.merge_qobjects(qobjects, andjoin=True)
+        return ~result if exclude else result
 
     def _qs_search_column_in(self, node, exclude=False):
         """ Search a specific column contains one of many values. """

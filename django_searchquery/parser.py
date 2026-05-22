@@ -5,7 +5,7 @@ from pyparsing import alphanums, printables
 from pyparsing import delimitedList, oneOf, infixNotation, opAssoc
 from pyparsing import Suppress, StringEnd, Optional, ZeroOrMore
 
-OPERATORS = '= != > >= <= < :'
+OPERATORS = '= != > >= <= < : ~ !~'
 ORDERBY = Suppress(CaselessKeyword('order by'))
 AND,OR,IN,NOT = map(CaselessKeyword, 'and or in not'.split())
 NOTIN = CaselessKeyword('not in')
